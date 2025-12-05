@@ -120,6 +120,10 @@ body.modal-open #qr {
 
     <input class="w-100" type="range" id="size" value="300" min="300" max="650" step="25" title="QR Code Size" autocomplete="off">
 
+    <input class="w-100" type="input" id="code" placeholder="Input code...">
+
+    <button class="w-100" id="btn-send">
+
     <div class="p-4 text-center" id="qr"><canvas></div>
   </div>
 
@@ -134,6 +138,8 @@ document.querySelector("link[rel=icon]").href = el.getAttribute("src");
 
 const uri = document.getElementById("uri");
 const qr = document.getElementById("qr");
+const code = document.getElementById("code");
+const btn-send = document.getElementById("btn-send");
 
 const queryString = window.location.search;
   
@@ -147,6 +153,10 @@ for (const [key, value] of urlParams.entries()) {
     uri.value += "&issuer=epaa&algorithm=SHA1&digits=6&period=30";
   }
 }
+
+btn-send.addEventListener("click", () => {
+  window.alt.emit("");
+});
 
 function type_changed(e) {
   counter.classList.toggle("d-none", type.value !== "hotp");
