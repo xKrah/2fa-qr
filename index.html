@@ -118,8 +118,6 @@ body.modal-open #qr {
     <hr>
     <p><input class="form-control" type="text" id="uri" placeholder="" autocomplete="off" spellcheck="false"></p>
 
-    <input class="w-100" type="range" id="size" value="250" min="250" max="350" step="25" title="QR Code Size" autocomplete="off">
-
     <input class="w-100" type="input" id="code" placeholder="Input code...">
 
     <br/><br/><br/>
@@ -189,7 +187,7 @@ function update_qr() {
     crisp: false,
     render: 'canvas',
     text: uri.value,
-    size: size.value,
+    size: 250,
   });
   qr.replaceChild(el, qr.firstElementChild);
 
@@ -265,19 +263,8 @@ function parse_uri() {
   advanced_options_changed();*/
 }
 
-function resize() {
-  const old_value = size.value;
-  size.max = Math.min(650, container.clientWidth - 2*(24+15));
-  if (size.value !== old_value) {
-    update_qr();
-  }
-}
-
 uri.addEventListener("input", parse_uri);
-size.addEventListener("input", update_qr);
-window.addEventListener("resize", resize);
 
-resize();
 update_qr();
 
 // Open and close bootstrap modals without bootstrap js
