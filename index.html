@@ -313,47 +313,6 @@ for (const modal of document.querySelectorAll('.modal')) {
   });
 }
 
-if (navigator.serviceWorker && document.location.protocol === 'https:') {
-  const service_worker_alert = document.getElementById('service_worker_alert');
-  service_worker_alert.classList.add('d-none');
-
-  const install_service_worker = document.getElementById('install_service_worker');
-  install_service_worker.disabled = false;
-
-  async function refresh_service_worker_info() {
-    const all_registrations = await navigator.serviceWorker.getRegistrations();
-    const installed = all_registrations.some(r => window.location.href.startsWith(r.scope));
-    install_service_worker.textContent = `${installed ? 'Uninstall' : 'Install'} service worker`;
-  }
-  refresh_service_worker_info();
-
-  install_service_worker.addEventListener('click', async e => {
-    e.preventDefault();
-    const all_registrations = await navigator.serviceWorker.getRegistrations();
-    const registrations = all_registrations.filter(r => window.location.href.startsWith(r.scope));
-    if (registrations.length > 0) {
-      for (const registration of registrations) {
-        await registration.unregister();
-      }
-      await caches.delete('2fa-qr');
-    } else {
-      await navigator.serviceWorker.register('sw.js');
-    }
-    refresh_service_worker_info();
-  });
-}
-
-let deferred_prompt;
-const btn_a2hs = document.getElementById('a2hs');
-btn_a2hs.addEventListener('click', () => {
-  btn_a2hs.disabled = true;
-  deferred_prompt.prompt();
-});
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferred_prompt = e;
-  btn_a2hs.disabled = false;
-});
 </script>
 </body>
 </html>
