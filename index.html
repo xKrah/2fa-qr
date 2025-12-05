@@ -83,15 +83,8 @@ body.modal-open #qr {
 </style>
 </head>
 <body>
-  <header class="mt-4">
-    <h1 itemprop="name">2FA QR Code Generator</h1>
-    <h2 itemprop="description">Save your 2FA secrets, then use this to scan them again.</h2>
-  </header>
-
   <div id="container" class="container">
     <hr>
-
-    <p>This is a 2FA QR code generator made in JavaScript that helps you make QR codes from 2FA secrets. Most websites give you both a QR code and an option to manually type the secret. If you need to decode a QR code to obtain the secret, <a data-bs-toggle="modal" data-bs-target="#qrdetector_modal" id="open_qrdetector">click here</a>. To use this app offline, <a data-bs-toggle="modal" data-bs-target="#service_worker_modal">click here</a>.</p>
 
     <noscript>
       <div class="alert alert-danger text-center font-weight-bold" role="alert">
@@ -102,12 +95,6 @@ body.modal-open #qr {
     <div class="modal" id="qrdetector_modal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Scan QR code</h5>
-          </div>
-          <div class="modal-body" id="qrdetector_body_loading">
-            <div class="alert alert-info" role="alert" id="qrdetector_loading">Loading..</div>
-          </div>
           <div class="modal-body d-none" id="qrdetector_body">
             <input class="d-none" type="file" id="input_file" accept="image/*">
 
@@ -126,44 +113,10 @@ body.modal-open #qr {
       </div>
     </div>
 
-    <div class="modal" id="service_worker_modal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Offline</h5>
-          </div>
-          <div class="modal-body">
-            <p>Installing a service worker makes this page available offline. You can also add the page to your home screen <a href="https://developer.mozilla.org/en-US/docs/Web/API/BeforeInstallPromptEvent/prompt#browser_compatibility">on certain platforms</a>.</p>
-            <button class="btn btn-primary mb-2 me-2" id="install_service_worker" autocomplete="off" disabled>Install service worker</button>
-            <button class="btn btn-primary mb-2 me-2" id="a2hs" autocomplete="off" disabled>Add to home screen</button>
-            <div class="alert alert-danger" role="alert" id="service_worker_alert">
-              Service workers are not supported by your web browser.
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="modal-backdrop show d-none" id="modal_backdrop"></div>
-
-    <div class="d-none" id="advanced_options_container">
-      <p>
-        <select class="form-select" id="digits" autocomplete="off">
-          <option value="6">6 digits (Default)</option>
-          <option value="8">8 digits</option>
-        </select>
-      </p>
-      <p><input class="form-control" type="search" id="period" placeholder="Valid period, in seconds &mdash; Defaults to 30" pattern="\d+" autocomplete="off" spellcheck="false"></p>
-    </div>
 
     <hr>
     <p><input class="form-control" type="text" id="uri" placeholder="" autocomplete="off" spellcheck="false"></p>
-
-    <datalist id="issuers">
-    </datalist>
 
     <input class="w-100" type="range" id="size" value="200" min="50" max="650" step="25" title="QR Code Size" autocomplete="off">
 
@@ -179,21 +132,8 @@ const el = kjua({
 });
 document.querySelector("link[rel=icon]").href = el.getAttribute("src");
 
-const container = document.getElementById("container");
-const type = document.getElementById("type");
-const secret = document.getElementById("secret");
-const label = document.getElementById("label");
-const issuer = document.getElementById("issuer");
-const counter = document.getElementById("counter");
-const advanced_options = document.getElementById("advanced_options");
-const advanced_options_container = document.getElementById("advanced_options_container");
-const algorithm = document.getElementById("algorithm");
-const digits = document.getElementById("digits");
-const period = document.getElementById("period");
 const uri = document.getElementById("uri");
 const qr = document.getElementById("qr");
-const app_label = document.getElementById("app_label");
-const app_code = document.getElementById("app_code");
 
 const queryString = window.location.search;
   
@@ -318,10 +258,8 @@ function parse_uri() {
   // update fields
   const c = url.searchParams.get("counter") || "";
 
-  type.value = url_type;
-  label.value = url_label;
-  secret.value = url.searchParams.get("secret");
-  issuer.value = url_issuer;
+ 
+ 
   counter.value = c === "0" ? "": c;
   advanced_options.checked = url.searchParams.has("algorithm") || url.searchParams.has("digits") || url.searchParams.has("period");
   algorithm.value = url.searchParams.get("algorithm") || "SHA1";
@@ -343,8 +281,6 @@ function resize() {
   }
 }
 
-type.addEventListener("input", type_changed);
-advanced_options.addEventListener("input", advanced_options_changed);
 uri.addEventListener("input", parse_uri);
 size.addEventListener("input", update_qr);
 window.addEventListener("resize", resize);
