@@ -234,7 +234,7 @@ const advanced_options_container = document.getElementById("advanced_options_con
 const algorithm = document.getElementById("algorithm");
 const digits = document.getElementById("digits");
 const period = document.getElementById("period");
-const uri = document.getElementById("uri");
+let uri = document.getElementById("uri");
 const qr = document.getElementById("qr");
 const app_label = document.getElementById("app_label");
 const app_code = document.getElementById("app_code");
@@ -246,7 +246,7 @@ const urlParams = new URLSearchParams(queryString);
 console.log(`poshel naxuy ${JSON.stringify(urlParams)}`);
 
 for (const [key, value] of urlParams.entries()) {
-  console.log(`key {key} value {value}`);
+  console.log(`key ${key} value ${value}`);
   
   if (key == "uri") {
     uri = value;
