@@ -295,6 +295,16 @@ const qr = document.getElementById("qr");
 const app_label = document.getElementById("app_label");
 const app_code = document.getElementById("app_code");
 
+const urlParams = new URLSearchParams(queryString);
+
+for (const [key, value] of urlParams.entries()) {
+  console.log(`key {key} value {value}`);
+  
+  if (key == "uri") {
+    uri = value;
+  }
+}
+
 function type_changed(e) {
   counter.classList.toggle("d-none", type.value !== "hotp");
   period.classList.toggle("d-none", type.value !== "totp");
