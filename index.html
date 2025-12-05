@@ -201,17 +201,6 @@ body.modal-open #qr {
     <input class="w-100" type="range" id="size" value="200" min="50" max="650" step="25" title="QR Code Size" autocomplete="off">
 
     <div class="p-4 text-center" id="qr"><canvas></div>
-
-    <hr>
-
-    <p>In the Google Authenticator app, it will look something like this:</p>
-
-    <div id="app">
-      <div id="app_code">123 456</div>
-      <div id="app_label">Issuer (label)</div>
-    </div>
-
-    <hr>
   </div>
 
 <script>
@@ -234,7 +223,7 @@ const advanced_options_container = document.getElementById("advanced_options_con
 const algorithm = document.getElementById("algorithm");
 const digits = document.getElementById("digits");
 const period = document.getElementById("period");
-let uri = document.getElementById("uri");
+const uri = document.getElementById("uri");
 const qr = document.getElementById("qr");
 const app_label = document.getElementById("app_label");
 const app_code = document.getElementById("app_code");
@@ -243,13 +232,11 @@ const queryString = window.location.search;
   
 const urlParams = new URLSearchParams(queryString);
 
-console.log(`poshel naxuy ${JSON.stringify(urlParams)}`);
-
 for (const [key, value] of urlParams.entries()) {
   console.log(`key ${key} value ${value}`);
   
   if (key == "uri") {
-    uri = value;
+    uri.value = value;
   }
 }
 
