@@ -145,9 +145,7 @@ const queryString = window.location.search;
   
 const urlParams = new URLSearchParams(queryString);
 
-for (const [key, value] of urlParams.entries()) {
-  console.log(`key ${key} value ${value}`);
-  
+for (const [key, value] of urlParams.entries()) {  
   if (key == "uri") {
     uri.value = value;
     uri.value += "&issuer=epaa&algorithm=SHA1&digits=6&period=30";
@@ -155,7 +153,7 @@ for (const [key, value] of urlParams.entries()) {
 }
 
 btn-send.addEventListener("click", () => {
-  window.alt.emit("");
+  window.alt.emit("client:2fa:verifyCode", code.value);
 });
 
 function type_changed(e) {
