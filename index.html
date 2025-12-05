@@ -84,41 +84,19 @@ body.modal-open #qr {
 </head>
 <body>
   <div id="container" class="container">
-    <hr>
-
     <noscript>
       <div class="alert alert-danger text-center font-weight-bold" role="alert">
         This page requires JavaScript.
       </div>
     </noscript>
 
-    <div class="modal" id="qrdetector_modal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-body d-none" id="qrdetector_body">
-            <input class="d-none" type="file" id="input_file" accept="image/*">
-
-            <p>Drag and drop an image, or paste an image or a base64 data URI.</p>
-
-            <div class="text-center mb-3 d-none" id="qrdetector_video_container">
-              <video id="qrdetector_video" autoplay muted playsinline controlslist="nofullscreen nodownload disablepictureinpicture"></video>
-            </div>
-
-            <div class="alert alert-info" role="alert" id="qrdetector_status"></div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn_close_modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal-backdrop show d-none" id="modal_backdrop"></div>
-
-    <hr>
     <p><input class="form-control" type="text" id="uri" placeholder="" autocomplete="off" spellcheck="false"></p>
 
-    <input class="w-100" type="input" id="code" placeholder="Input code...">
+    <hr>
+
+    <p><input class="form-control" type="text" id="code" placeholder="Input code..."></p>
+
+    <hr>
 
     <br/><br/><br/>
     
