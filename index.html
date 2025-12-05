@@ -118,7 +118,7 @@ body.modal-open #qr {
     <hr>
     <p><input class="form-control" type="text" id="uri" placeholder="" autocomplete="off" spellcheck="false"></p>
 
-    <input class="w-100" type="range" id="size" value="200" min="50" max="650" step="25" title="QR Code Size" autocomplete="off">
+    <input class="w-100" type="range" id="size" value="300" min="300" max="650" step="25" title="QR Code Size" autocomplete="off">
 
     <div class="p-4 text-center" id="qr"><canvas></div>
   </div>
@@ -183,12 +183,12 @@ function update_qr() {
   });
   qr.replaceChild(el, qr.firstElementChild);
 
-  if (label.value === "" && issuer.value === "") {
+  /*if (label.value === "" && issuer.value === "") {
     app_label.textContent = "Issuer (label)";
   } else {
     app_label.textContent = issuer.value === "" ? label.value : `${issuer.value} (${label.value})`;
-  }
-  app_code.textContent = digits.value === "6" ? "123 456" : "1234 5678"
+  }*/
+  //app_code.textContent = digits.value === "6" ? "123 456" : "1234 5678"
 }
 
 function decode(s) {
@@ -268,6 +268,7 @@ size.addEventListener("input", update_qr);
 window.addEventListener("resize", resize);
 
 resize();
+update_qr();
 
 // Open and close bootstrap modals without bootstrap js
 function open_modal(element) {
