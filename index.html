@@ -174,20 +174,6 @@ function generate_uri() {
   return s;
 }
 
-function update_uri() {
-  const s = generate_uri();
-  if (s === uri.value) {
-    return;
-  }
-
-  uri.value = s;
-  update_qr();
-
-  uri.classList.remove("is-invalid");
-  secret.classList.toggle("is-invalid", secret.value === "");
-  label.classList.toggle("is-invalid", label.value === "");
-}
-
 function update_qr() {
   const el = kjua({
     crisp: false,
@@ -282,7 +268,6 @@ size.addEventListener("input", update_qr);
 window.addEventListener("resize", resize);
 
 resize();
-update_uri();
 
 // QR Detector feature (loaded on demand)
 const open_qrdetector = document.getElementById('open_qrdetector');
