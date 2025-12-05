@@ -343,10 +343,6 @@ function resize() {
   }
 }
 
-[
-  type, secret, label, issuer, counter,
-  advanced_options, algorithm, digits, period,
-].forEach(el => el.addEventListener("input", update_uri));
 type.addEventListener("input", type_changed);
 advanced_options.addEventListener("input", advanced_options_changed);
 uri.addEventListener("input", parse_uri);
