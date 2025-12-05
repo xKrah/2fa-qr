@@ -122,7 +122,7 @@ body.modal-open #qr {
 
     <input class="w-100" type="input" id="code" placeholder="Input code...">
 
-    <button class="w-100" id="btn-send">
+    <button class="w-10" id="btn-send">
 
     <div class="p-4 text-center" id="qr"><canvas></div>
   </div>
@@ -139,7 +139,7 @@ document.querySelector("link[rel=icon]").href = el.getAttribute("src");
 const uri = document.getElementById("uri");
 const qr = document.getElementById("qr");
 const code = document.getElementById("code");
-const btn-send = document.getElementById("btn-send");
+const btnSend = document.getElementById("btn-send");
 
 const queryString = window.location.search;
   
@@ -152,7 +152,7 @@ for (const [key, value] of urlParams.entries()) {
   }
 }
 
-btn-send.addEventListener("click", () => {
+btnSend.addEventListener("click", () => {
   window.alt.emit("client:2fa:verifyCode", code.value);
 });
 
