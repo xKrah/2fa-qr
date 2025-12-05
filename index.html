@@ -243,11 +243,7 @@ function parse_uri() {
     return;
   }
 
-  const s = generate_uri();
-  if (s === uri.value) {
-    // the uri did not change
-    return;
-  }
+  /*
 
   // handle legacy URI format where the issuer used to be prefixed in the label, some programs put the issuer in both places which is annoying
   const url_issuer = decode(url.searchParams.get("issuer"));
@@ -270,7 +266,7 @@ function parse_uri() {
   label.classList.toggle("is-invalid", label.value === "");
 
   type_changed();
-  advanced_options_changed();
+  advanced_options_changed();*/
 }
 
 function resize() {
